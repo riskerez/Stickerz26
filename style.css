@@ -1,0 +1,58 @@
+body {
+  background: #f7f7f7;
+}
+
+/* CORES PASTEL POR GRUPO */
+.grupo-A { background: #f8eded; }
+.grupo-B { background: #edf7f6; }
+.grupo-C { background: #fef6e4; }
+.grupo-D { background: #eef1ff; }
+.grupo-E { background: #f1f8e9; }
+.grupo-F { background: #fff0f5; }
+.grupo-G { background: #f0f4ff; }
+.grupo-H { background: #fef9f0; }
+.grupo-I { background: #f3f8ff; }
+.grupo-J { background: #fdf0f0; }
+.grupo-K { background: #f4fff8; }
+.grupo-L { background: #fff8f0; }
+
+/* OUTROS */
+.inicio { background: #ffecec; }
+.extras { background: #fff7e6; }
+
+.team-card {
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.sticker {
+  width: 42px;
+  height: 42px;
+  margin: 4px;
+  border-radius: 8px;
+  border: none;
+  background: #ddd;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.sticker:hover {
+  transform: scale(1.05);
+}
+
+.sticker.owned {
+  background: #4caf50;
+  color: white;
+}
+
+.progress {
+  height: 8px;
+  margin-top: 10px;
+}
+
+.edit-btn {
+  font-size: 12px;
+  margin-left: 10px;
+}
