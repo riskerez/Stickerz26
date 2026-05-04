@@ -30,6 +30,15 @@
   <div id="app"></div>
 </div>
 
+<footer class="footer text-center p-3 shadow-sm bg-light">
+  <button class="btn btn-dark me-2" onclick="exportData()">Exportar</button>
+  
+  <label class="btn btn-dark mb-0">
+    Importar
+    <input type="file" id="importFile" hidden accept=".json" onchange="importData(event)">
+  </label>
+</footer>
+
 <script src="script.js"></script>
 </body>
 </html>
