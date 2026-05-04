@@ -22,7 +22,7 @@ const grupos = {
   L: ["Inglaterra", "Croácia", "Gana", "Panamá"]
 };
 
-// SIGLA + PAGINA
+// INFO
 const info = {
   "México": { sigla: "MEX", page: 8 },
   "África do Sul": { sigla: "RSA", page: 10 },
@@ -83,7 +83,51 @@ function saveData(data) {
   localStorage.setItem("stickers", JSON.stringify(data));
 }
 
-// CONTADOR
+// EXPORTAR
+function exportData() {
+  const data = localStorage.getItem("stickers") || "{}";
+
+  const blob = new Blob([data], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "stickers_backup.json";
+  a.click();
+
+  URL.revokeObjectURL(url);
+}
+
+// IMPORTAR
+function importData(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = function(e) {
+    try {
+      const data = JSON.parse(e.target.result);
+
+      if (typeof data !== "object") {
+        alert("Arquivo inválido!");
+        return;
+      }
+
+      if (confirm("Isso vai substituir seus dados atuais. Continuar?")) {
+        localStorage.setItem("stickers", JSON.stringify(data));
+        render();
+      }
+
+    } catch (err) {
+      alert("Erro ao importar arquivo!");
+    }
+  };
+
+  reader.readAsText(file);
+}
+
+// RESTO DO CÓDIGO IGUAL (sem mudanças)
 function updateGlobalCounter() {
   const data = getData();
   let total = 0, owned = 0;
@@ -101,7 +145,6 @@ function updateGlobalCounter() {
     `Álbum: ${owned}/${total} (${total - owned} faltando)`;
 }
 
-// TOGGLE
 function toggle(team, number) {
   if (!editMode[team]) return;
 
@@ -118,13 +161,11 @@ function toggle(team, number) {
   render();
 }
 
-// EDIT
 function toggleEdit(team) {
   editMode[team] = !editMode[team];
   render();
 }
 
-// UI
 const app = document.getElementById("app");
 
 function createStickers(team, total, start = 1) {
@@ -149,7 +190,6 @@ function createStickers(team, total, start = 1) {
   return html;
 }
 
-// RENDER GRUPOS (igual já estava)
 function renderGrupos(filter="") {
   app.innerHTML = "";
   const normalizedFilter = normalize(filter);
@@ -236,7 +276,6 @@ function renderExtras() {
   `;
 }
 
-// CONTROLE
 function render() {
   const filter = document.getElementById("searchInput").value;
 
