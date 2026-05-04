@@ -2,7 +2,7 @@ body {
   background: #f7f7f7;
 }
 
-/* CORES PASTEL POR GRUPO */
+/* GRUPOS */
 .grupo-A { background: #f8eded; }
 .grupo-B { background: #edf7f6; }
 .grupo-C { background: #fef6e4; }
@@ -16,16 +16,24 @@ body {
 .grupo-K { background: #f4fff8; }
 .grupo-L { background: #fff8f0; }
 
-/* OUTROS */
-.inicio { background: #ffecec; }
-.extras { background: #fff7e6; }
+/* CORES CORRIGIDAS */
+.inicio { background: #fef6e4; }
+.extras { background: #f8eded; }
 
+/* CARD */
 .team-card {
   border-radius: 12px;
   padding: 15px;
   margin-bottom: 20px;
 }
 
+/* TEXTO */
+.page {
+  font-size: 12px;
+  color: #444;
+}
+
+/* FIGURINHA */
 .sticker {
   width: 42px;
   height: 42px;
@@ -34,25 +42,34 @@ body {
   border: none;
   background: #ddd;
   font-weight: bold;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.sticker:hover {
-  transform: scale(1.05);
 }
 
 .sticker.owned {
-  background: #4caf50;
+  background: black;
   color: white;
 }
 
+/* OPACIDADE AO COMPLETAR */
+.complete-opacity {
+  opacity: 0.5;
+}
+
+/* PROGRESSO */
 .progress {
   height: 8px;
   margin-top: 10px;
 }
 
-.edit-btn {
-  font-size: 12px;
-  margin-left: 10px;
+.progress-bar {
+  background: black;
+}
+
+/* BOTÕES */
+.btn-dark {
+  background: black;
+  border: none;
+}
+
+.btn-dark:hover {
+  background: #333;
 }
