@@ -149,7 +149,7 @@ function createStickers(team, total, start = 1) {
   return html;
 }
 
-// RENDER GRUPOS
+// RENDER GRUPOS (igual já estava)
 function renderGrupos(filter="") {
   app.innerHTML = "";
   const normalizedFilter = normalize(filter);
@@ -167,10 +167,10 @@ function renderGrupos(filter="") {
 
       groupContent += `
         <div class="mb-3">
-          <h6 class="d-flex justify-content-between align-items-center">
-            <div>
-              ${team} (${i.sigla})
-              <div class="page">Página ${i.page}</div>
+          <h6 class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
+            <div class="team-info">
+              <span class="team-name">${team} (${i.sigla})</span>
+              <span class="page">Página ${i.page}</span>
             </div>
             <button class="btn btn-sm ${isEditing ? 'btn-danger' : 'btn-dark'}"
               onclick="toggleEdit('${team}')">
@@ -194,16 +194,15 @@ function renderGrupos(filter="") {
   }
 }
 
-// INICIO
 function renderInicio() {
   const isEditing = editMode["copa"];
 
   app.innerHTML = `
     <div class="team-card inicio">
-      <h6 class="d-flex justify-content-between align-items-center">
-        <div>
-          Copa do Mundo
-          <div class="page">Página 1</div>
+      <h6 class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
+        <div class="team-info">
+          <span class="team-name">Copa do Mundo (FWC)</span>
+          <span class="page">Página 1</span>
         </div>
         <button class="btn btn-sm ${isEditing ? 'btn-danger' : 'btn-dark'}"
           onclick="toggleEdit('copa')">
@@ -216,16 +215,15 @@ function renderInicio() {
   `;
 }
 
-// EXTRAS
 function renderExtras() {
   const isEditing = editMode["coca"];
 
   app.innerHTML = `
     <div class="team-card extras">
-      <h6 class="d-flex justify-content-between align-items-center">
-        <div>
-          Coca-Cola
-          <div class="page">Página 112</div>
+      <h6 class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
+        <div class="team-info">
+          <span class="team-name">Coca-Cola (CC)</span>
+          <span class="page">Página 112</span>
         </div>
         <button class="btn btn-sm ${isEditing ? 'btn-danger' : 'btn-dark'}"
           onclick="toggleEdit('coca')">
