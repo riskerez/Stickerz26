@@ -1,5 +1,6 @@
 body {
   background: #f7f7f7;
+  padding-bottom: 90px; /* espaço pro footer não cobrir conteúdo */
 }
 
 /* GRUPOS */
@@ -94,13 +95,33 @@ body {
     font-size: 11px;
   }
 }
+
+/* FOOTER FIXO */
 .footer {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  z-index: 1000;
 }
 
+/* BOTÕES DO FOOTER */
 .footer .btn-dark {
   min-width: 110px;
+}
+
+.code-box {
+  font-size: 12px;
+  word-break: break-all;
+  background: #eee;
+  padding: 6px;
+  margin: 5px auto;
+  width: 90%;
+  border-radius: 6px;
+  cursor: pointer;
 }
