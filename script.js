@@ -6,7 +6,59 @@ function normalize(text) {
   return text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
+// =====================
+// COMPRESSÃO (CÓDIGO)
+// =====================
+
+function generateCode() {
+  const data = localStorage.getItem("stickers") || "{}";
+  try {
+    return LZString.compressToEncodedURIComponent(data);
+  } catch {
+    return "---";
+  }
+}
+
+function updateCodeDisplay() {
+  const el = document.getElementById("albumCode");
+  if (!el) return;
+  el.innerText = generateCode();
+}
+
+// copiar ao clicar
+document.addEventListener("click", function(e) {
+  if (e.target.id === "albumCode") {
+    navigator.clipboard.writeText(e.target.innerText);
+    alert("Código copiado!");
+  }
+});
+
+// importar por código
+function importByCode() {
+  const code = prompt("Cole o código do álbum:");
+  if (!code) return;
+
+  try {
+    const json = LZString.decompressFromEncodedURIComponent(code);
+
+    if (!json) throw new Error();
+
+    const data = JSON.parse(json);
+
+    if (confirm("Isso vai substituir seus dados atuais. Continuar?")) {
+      localStorage.setItem("stickers", JSON.stringify(data));
+      render();
+    }
+
+  } catch {
+    alert("Código inválido!");
+  }
+}
+
+// =====================
 // DADOS
+// =====================
+
 const grupos = {
   A: ["México", "África do Sul", "Coreia do Sul", "República Tcheca"],
   B: ["Canadá", "Bósnia", "Catar", "Suíça"],
@@ -22,7 +74,6 @@ const grupos = {
   L: ["Inglaterra", "Croácia", "Gana", "Panamá"]
 };
 
-// INFO
 const info = {
   "México": { sigla: "MEX", page: 8 },
   "África do Sul": { sigla: "RSA", page: 10 },
@@ -74,7 +125,10 @@ const info = {
   "Panamá": { sigla: "PAN", page: 104 }
 };
 
+// =====================
 // STORAGE
+// =====================
+
 function getData() {
   return JSON.parse(localStorage.getItem("stickers")) || {};
 }
@@ -83,7 +137,10 @@ function saveData(data) {
   localStorage.setItem("stickers", JSON.stringify(data));
 }
 
-// EXPORTAR
+// =====================
+// EXPORT / IMPORT
+// =====================
+
 function exportData() {
   const data = localStorage.getItem("stickers") || "{}";
 
@@ -98,7 +155,6 @@ function exportData() {
   URL.revokeObjectURL(url);
 }
 
-// IMPORTAR
 function importData(event) {
   const file = event.target.files[0];
   if (!file) return;
@@ -109,17 +165,12 @@ function importData(event) {
     try {
       const data = JSON.parse(e.target.result);
 
-      if (typeof data !== "object") {
-        alert("Arquivo inválido!");
-        return;
-      }
-
       if (confirm("Isso vai substituir seus dados atuais. Continuar?")) {
         localStorage.setItem("stickers", JSON.stringify(data));
         render();
       }
 
-    } catch (err) {
+    } catch {
       alert("Erro ao importar arquivo!");
     }
   };
@@ -127,7 +178,10 @@ function importData(event) {
   reader.readAsText(file);
 }
 
-// RESTO DO CÓDIGO IGUAL (sem mudanças)
+// =====================
+// CONTADOR
+// =====================
+
 function updateGlobalCounter() {
   const data = getData();
   let total = 0, owned = 0;
@@ -144,6 +198,10 @@ function updateGlobalCounter() {
   document.getElementById("globalCounter").innerText =
     `Álbum: ${owned}/${total} (${total - owned} faltando)`;
 }
+
+// =====================
+// INTERAÇÃO
+// =====================
 
 function toggle(team, number) {
   if (!editMode[team]) return;
@@ -165,6 +223,10 @@ function toggleEdit(team) {
   editMode[team] = !editMode[team];
   render();
 }
+
+// =====================
+// UI
+// =====================
 
 const app = document.getElementById("app");
 
@@ -189,6 +251,10 @@ function createStickers(team, total, start = 1) {
 
   return html;
 }
+
+// =====================
+// RENDER
+// =====================
 
 function renderGrupos(filter="") {
   app.innerHTML = "";
@@ -284,6 +350,7 @@ function render() {
   if (currentPage === "extras") renderExtras();
 
   updateGlobalCounter();
+  updateCodeDisplay();
 }
 
 function setPage(page) {
