@@ -16,7 +16,7 @@ body {
 .grupo-K { background: #f4fff8; }
 .grupo-L { background: #fff8f0; }
 
-/* CORES CORRIGIDAS */
+/* CORES */
 .inicio { background: #fef6e4; }
 .extras { background: #f8eded; }
 
@@ -27,10 +27,19 @@ body {
   margin-bottom: 20px;
 }
 
-/* TEXTO */
+/* INFO */
+.team-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.team-name {
+  font-weight: 600;
+}
+
 .page {
   font-size: 12px;
-  color: #444;
+  color: #555;
 }
 
 /* FIGURINHA */
@@ -49,9 +58,10 @@ body {
   color: white;
 }
 
-/* OPACIDADE AO COMPLETAR */
+/* COMPLETO */
 .complete-opacity {
-  opacity: 0.5;
+  opacity: 0.35;
+  filter: grayscale(40%);
 }
 
 /* PROGRESSO */
@@ -72,4 +82,15 @@ body {
 
 .btn-dark:hover {
   background: #333;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .team-info {
+    margin-bottom: 5px;
+  }
+
+  .page {
+    font-size: 11px;
+  }
 }
