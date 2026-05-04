@@ -1,5 +1,6 @@
 let currentPage = "grupos";
 let editMode = {};
+let codeVisible = true;
 
 // NORMALIZAÇÃO
 function normalize(text) {
@@ -19,15 +20,34 @@ function generateCode() {
   }
 }
 
+function toggleCode() {
+  codeVisible = !codeVisible;
+
+  const btn = document.getElementById("toggleCodeBtn");
+
+  if (codeVisible) {
+    btn.classList.remove("closed");
+  } else {
+    btn.classList.add("closed");
+  }
+
+  updateCodeDisplay();
+}
+
 function updateCodeDisplay() {
   const el = document.getElementById("albumCode");
   if (!el) return;
-  el.innerText = generateCode();
+
+  if (codeVisible) {
+    el.innerText = generateCode();
+  } else {
+    el.innerText = "Ocultado";
+  }
 }
 
 // copiar ao clicar
 document.addEventListener("click", function(e) {
-  if (e.target.id === "albumCode") {
+  if (e.target.id === "albumCode" && codeVisible) {
     navigator.clipboard.writeText(e.target.innerText);
     alert("Código copiado!");
   }
