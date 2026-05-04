@@ -125,3 +125,34 @@ body {
   border-radius: 6px;
   cursor: pointer;
 }
+
+.eye-btn {
+  width: 22px;
+  height: 22px;
+  border: 2px solid black;
+  border-radius: 50%;
+  position: relative;
+  background: transparent;
+  cursor: pointer;
+}
+
+.eye-btn::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: black;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.eye-btn.closed {
+  border-radius: 2px;
+}
+
+.eye-btn.closed::after {
+  width: 12px;
+  height: 2px;
+}
