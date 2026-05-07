@@ -211,7 +211,7 @@ function updateGlobalCounter() {
     owned += (data[team] || []).length;
   });
 
-  total += 9 + 14;
+  total += 20 + 14;
   owned += (data["copa"] || []).length;
   owned += (data["coca"] || []).length;
 
@@ -336,7 +336,7 @@ function renderInicio() {
         </button>
       </h6>
 
-      ${createStickers("copa", 9, 0)}
+      ${createStickers("copa", 20, 0)}
     </div>
   `;
 }
